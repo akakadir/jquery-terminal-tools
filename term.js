@@ -76,23 +76,6 @@ this.echo('[[;#fff;]Syntax Error: 404, invalid or missing.]')
 }
 },
 
-torrent: function(a, b){
-$.ajaxSetup({async: false})
-$.get('https://torrents-api.ryukme.repl.co/api/'+b.replace(/\-/g, ' '), function(x) {
-f11 = ''
-$.each(x, function(i, value) { f11 = f11+value['Name']+' '+value['Size']+'\n'+value['Url']+'\n';
-});
-}).fail(function() {
-err = ""
-this(err)
-});
-if(a === '-s'){
-this.echo(f11.replace(/\undefined\n/g, '').replace('undefined', '[[;#fff;]Syntax Error: 404, invalid or missing.]'))
-} else {
-this.echo('[[;#fff;]Syntax Error: 404, invalid or missing.]')
-}
-},
-
 info: function(a){
 $.ajaxSetup({async: false})
 $.get('https://cloudflare.com/cdn-cgi/trace', function(x){
