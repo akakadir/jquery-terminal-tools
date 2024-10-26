@@ -76,18 +76,6 @@ this.echo('[[;#fff;]Syntax Error: 404, invalid or missing.]')
 }
 },
 
-whois: function(a, b){
-$.ajaxSetup({async: false})
-$.get('https://whois.azurewebsites.net/api/whois/' +b, function(x){
-f10 = x.Raw
-});
-if(a === '-q'){
-this.echo(f10.replace(/\%/g, '#'))
-} else {
-this.echo('[[;#fff;]Syntax Error: 404, invalid or missing.]')
-}
-},
-
 torrent: function(a, b){
 $.ajaxSetup({async: false})
 $.get('https://torrents-api.ryukme.repl.co/api/'+b.replace(/\-/g, ' '), function(x) {
@@ -133,6 +121,22 @@ this.echo('[[;#fff;]Syntax Error: 404, invalid or missing.]')
 }
 },
 
+lyrics: function(a, b, c){
+$.ajaxSetup({async: false})
+$.get('https://lyrist.vercel.app/api/'+c.replace(/\-/g, ' ')+'/'+b.replace(/\-/g, ' '), function(x){
+f99 = x.lyrics
+})
+.fail(function() {
+err = ""
+this(err)
+});
+if(a === '-s'){
+this.echo(f99)
+} else {
+this.echo('[[;#fff;]Syntax Error: 404, invalid or missing.]')
+}
+},
+
 crypto: function(a){
 $.ajaxSetup({async: false})
 $.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=35&page=1&sparkline=false', function(x) {
@@ -147,38 +151,6 @@ f22 = f20+f21.replace(/\+-/g, '[[;#F00;]-')+'[[;#888;]'+f22;
 })
 if(a === '-i'){
 this.echo(f22)
-} else {
-this.echo('[[;#fff;]Syntax Error: 404, invalid or missing.]')
-}
-},
-
-ytdl: function(a, b, c){
-$.ajaxSetup({async: false})
-$.get('https://youtube.michaelbelgium.me/api/converter/convert?url=https://youtu.be/'+b+'&api_token=kv0DdoJyqHI0tFzqmeIjb7k13LIVOaSBXAmYmYZQN92HKy3r0ahssItOIqli&format='+c, function(x){
-f23 = x.title;
-f24 = 'https://i3.ytimg.com/vi/'+b+'/hqdefault.jpg'
-f25 = x.file;
-});
-if(a === '-v'){
-this.echo('title: '+f23)
-this.echo('cover: '+f24)
-this.echo('file: '+f25)
-} else {
-this.echo('[[;#fff;]Syntax Error: 404, invalid or missing.]')
-}
-},
-
-sh: function(a){
-$.ajaxSetup({async: false})
-$.get('https://is.gd/create.php?format=simple&url=www.example.com', function(x){
-f13 = x
-})
-.fail(function() {
-err = ""
-this(err)
-});
-if(a === '-l'){
-this.echo(f13)
 } else {
 this.echo('[[;#fff;]Syntax Error: 404, invalid or missing.]')
 }
@@ -207,7 +179,7 @@ this.echo("[[;#fff;]Syntax Error: invalid or > 32]");
 },
 
 shutdown: function(){
-window.location.replace("//akakadir.online")
+window.location.replace("//akakadir.github.io")
 },
 
 help: function(){
@@ -225,5 +197,5 @@ this.echo('[[;#fff;]Syntax Error: 404, Command not found.]')
 },
 checkArity: false,
 autocompleteMenu: true,
-completion: ['iam', 'help', 'cdn', 'weather', 'torrent', 'whois', 'info', 'crypto', 'ytdl', 'listrepos', 'viewrepo', 'password', 'date', 'shutdown']
+completion: ['iam', 'help', 'cdn', 'weather', 'info', 'crypto', 'listrepos', 'viewrepo', 'password', 'date', 'shutdown', 'lyrics']
 });
